@@ -1,20 +1,50 @@
-// Part_A.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-#include <iostream>
-
-int main()
+// part1.c
+//@author: Surbhi Bahri
+#define _CRT_SECURE_NO_WARNINGS
+#define _CRTDBG_MAP_ALLOC // need this to get the line identification
+//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF|_CRTDBG_LEAK_CHECK_DF); 
+// in main, after local declarations
+//NB must be in debug build
+#include <crtdbg.h>
+#include <stdio.h>
+#include <string.h>
+typedef enum{FALSE = 0, TRUE} BOOL;
+struct Frame{
+char* frameName;
+struct Frame* pNext;
+};
+typedef struct{
+char* animationName;
+struct Frame* frames;
+}Animation;
+// Forward declarations
+void InitAnimation(Animation*);
+void InsertFrame(Animation*);
+void DeleteFrame(Animation*);
+void EditFrame(Animation*);
+void ReportAnimation(Animation*);
+void CleanUp(Animation*);
+int main(void)
 {
-    std::cout << "Hello World!\n";
+char response;
+BOOL RUNNING = TRUE;
+Animation RG;
+_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | 
+_CRTDBG_LEAK_CHECK_DF);
+InitAnimation(&RG);
+while (RUNNING)
+{
+printf( "MENU\n 1. Insert a Frame at the front\n 2. Delete last Frame\n 3. Edit a Frame\n 4. Report the Animation\n 5. Quit\n"); 
+scanf("%c", &response);
+switch (response)
+{
+case '1':InsertFrame(&RG);break;
+case '2':DeleteFrame(&RG);break;
+case '3':EditFrame(&RG);break;
+case '4':ReportAnimation(&RG);break;
+case '5':RUNNING = FALSE;CleanUp(&RG);break;
+default:printf("Please enter a valid option\n");
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+}
+return 0;
+}
