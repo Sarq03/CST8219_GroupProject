@@ -1,3 +1,0 @@
-C:/Users/billy/source/repos/Belent-Patrus/CST8219_GroupProject/PartA/out/build/x64-Debug/CMakeFiles/PartA.dir
-C:/Users/billy/source/repos/Belent-Patrus/CST8219_GroupProject/PartA/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-C:/Users/billy/source/repos/Belent-Patrus/CST8219_GroupProject/PartA/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir

@@ -48,3 +48,22 @@ int main(void)
 	}
 	return 0;
 }
+
+void InitAnimation(Animation* animation) {
+
+}
+void InsertFrame(Animation* animation) {
+
+}
+void DeleteFrame(Animation* animation) {
+
+}
+void EditFrame(Animation* animation) {
+
+}
+void ReportAnimation(Animation* animation) {
+
+}
+void CleanUp(Animation* animation) {
+
+}
