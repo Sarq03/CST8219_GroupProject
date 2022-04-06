@@ -350,3 +350,5 @@ MigrationBackup/
 .ionide/
 
 PartA/out
+PartB/out
+PartC/out
