@@ -117,7 +117,7 @@ void DeleteFrame(Animation* animation) {
 
 void EditFrame(Animation* animation) {
 	int counter = 0;
-	int index = 0;
+	int index = -1;
 	struct Frame* newFrame = animation->frames;
 
 	while (newFrame->pNext != NULL) {
@@ -125,22 +125,28 @@ void EditFrame(Animation* animation) {
 		counter++;
 	}
 
-	printf("Edit a frame in the animation\nThere are %d frame(s) in the list. Please specify the index (<= %d) to edit at: ", counter, (counter-1));
-	if (scanf("%d", &index) == 0) {
-		printf("an error occured");
-	}
+	do {
+		printf("\nEdit a frame in the animation\nThere are %d frame(s) in the list. Please specify the index (<= %d) to edit at: ", counter, (counter - 1));
+		if (scanf("%d", &index) == 0) {
+			printf("An error occured. ");
+		}
+		if (0 > index || (index > (counter - 1) && index != 0)) {
+			printf("Invalid input, please try again.\n");
+		}
+		while (getchar() != '\n');
+	}while (0 > index || index > (counter - 1));
+
 	counter = 0;
 	newFrame = animation->frames;
 	while (counter < index) {
 		newFrame = newFrame->pNext;
 		counter++;
 	}
-	if (getchar()) {}
 	printf("The name of this frame is %s\nWhat do you want to replace it with?\n", newFrame->frameName);
 	if (scanf("%25[^\n]s", newFrame->frameName) == 0) {
 		printf("an error occured");
 	}
-	if (getchar()) {}
+	while (getchar() != '\n');
 	
 }
 
@@ -176,5 +182,7 @@ void CleanUp(Animation* animation) {
 	free(delFrame->frameName);
 	delFrame = NULL;
 	free(delFrame);
+
+	printf("\nexiting...\n");
 
 }
