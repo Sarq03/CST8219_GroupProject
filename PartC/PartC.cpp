@@ -5,7 +5,8 @@
 //_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF|_CRTDBG_LEAK_CHECK_DF);
 // in main, after local declarations
 //NB must be in debug build #include <crtdbg.h>
-#include <iostream> #include <string>
+#include <iostream> 
+#include <string>
 #include <vector>
 #include <forward_list>
 using namespace std;
