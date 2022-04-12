@@ -50,6 +50,13 @@ int main(void)
 	return 0;
 }
 
+/***********************************************************************
+Function Name: InitAnimation
+Purpose: Initializes memory for and names the animation
+Parameters: Animation
+Return: None
+Author: Haroun Benmeddour, Sarfraj Singh, Daniel Samociuk, Belent Patrus
+***********************************************************************/
 void InitAnimation(Animation* animation) {
 
 	animation->animationName = "Animation 1";
@@ -58,6 +65,7 @@ void InitAnimation(Animation* animation) {
 	animation->frames->frameName = (char*)malloc(sizeof(char) * (26));	
 	animation->frames->pNext = NULL;
 	
+	//Ensures memory allocation is succesful
 	if (animation->frames == NULL || animation->frames->frameName == NULL) {
 		fprintf(stderr, "Memory allocation failed");
 		return;
@@ -65,22 +73,33 @@ void InitAnimation(Animation* animation) {
 	
 }
 
+/***********************************************************************
+Function Name: IsertFrame
+Purpose: Inserts a frame at the front
+Parameters: Animation
+Return: None
+Author: Haroun Benmeddour, Sarfraj Singh, Daniel Samociuk, Belent Patrus
+***********************************************************************/
 void InsertFrame(Animation* animation) {
 
+	//memory allocation
 	struct Frame* newFrame = malloc(sizeof(struct Frame*));
 	struct Frame* tempFrame = malloc(sizeof(struct Frame*));
 
+	//ensures a frame exists
 	if (animation->frames != NULL){
 		tempFrame = animation->frames;
 	}
 	
 	newFrame->frameName = (char*)malloc(sizeof(char) * (26));
 	
+	//ensures memory allocation is successful
 	if (newFrame->pNext == NULL || newFrame->frameName == NULL) {
 		fprintf(stderr, "Memory allocation failed");
 		return;
 	}
 
+	//Displays instructions
 	printf("Selected Option: 1\nInsert a frame in the animation\nPlease enter the frame name: ");
 	if(scanf("%25[^\n]s", newFrame->frameName) == 0){
 		printf("An error occured");
@@ -97,8 +116,16 @@ void InsertFrame(Animation* animation) {
 	
 }
 
+/***********************************************************************
+Function Name: DeleteFrame
+Purpose: Deletes the last frame and frees its memory
+Parameters: Animation
+Return: None
+Author: Haroun Benmeddour, Sarfraj Singh, Daniel Samociuk, Belent Patrus
+***********************************************************************/
 void DeleteFrame(Animation* animation) {
 
+	//Ensures a frame exists to delete
 	if (animation->frames->pNext == NULL) {
 		printf("No frames to delete\n");
 		return;
@@ -106,6 +133,7 @@ void DeleteFrame(Animation* animation) {
 
 	struct Frame* delFrame = animation->frames;
 
+	//loops to the end of the list
 	while (delFrame->pNext->pNext != NULL) {
 		delFrame = delFrame->pNext;
 	}
@@ -125,6 +153,7 @@ void EditFrame(Animation* animation) {
 		counter++;
 	}
 
+	//Defensive programming ensuring a frame is properly selected
 	do {
 		printf("\nEdit a frame in the animation\nThere are %d frame(s) in the list. Please specify the index (<= %d) to edit at: ", counter, (counter - 1));
 		if (scanf("%d", &index) == 0) {
@@ -142,6 +171,8 @@ void EditFrame(Animation* animation) {
 		newFrame = newFrame->pNext;
 		counter++;
 	}
+
+	//displays instructions
 	printf("The name of this frame is %s\nWhat do you want to replace it with?\n", newFrame->frameName);
 	if (scanf("%25[^\n]s", newFrame->frameName) == 0) {
 		printf("an error occured");
@@ -150,10 +181,19 @@ void EditFrame(Animation* animation) {
 	
 }
 
+/***********************************************************************
+Function Name: ReportAnimation
+Purpose: Lists all available frames and their indicies
+Parameters: Animation
+Return: None
+Author: Haroun Benmeddour, Sarfraj Singh, Daniel Samociuk, Belent Patrus
+***********************************************************************/
 void ReportAnimation(Animation* animation) {
 	int counter = 0;
 	struct Frame* newFrame = animation->frames;
 	printf("\nAnimation Name is: %s\nReport the animation\n", animation->animationName);
+
+	//loops through and prints all available frames in order
 	while (newFrame->pNext != NULL) {
 		printf("Image #%d, file name = %s\n\n", counter, newFrame->frameName);
 		newFrame = newFrame->pNext;
@@ -161,6 +201,13 @@ void ReportAnimation(Animation* animation) {
 	}
 }
 
+/***********************************************************************
+Function Name: CleanUp
+Purpose: Deletes frames and frees corresponding memory
+Parameters: Animation
+Return: None
+Author: Haroun Benmeddour, Sarfraj Singh, Daniel Samociuk, Belent Patrus
+***********************************************************************/
 void CleanUp(Animation* animation) {
 	
 	struct Frame* delFrame = animation->frames;

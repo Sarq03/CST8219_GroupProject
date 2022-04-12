@@ -25,13 +25,12 @@ void Animation::InsertFrame() {
 	newFrame->GetpNext() = frames;
 	//Makes frames the new 
 	frames = newFrame; 
-	//Since we removed what was inside the dynamic variable, we need to make it null.
-	newInput = NULL;
+
+
 
 }
 
 Animation::Animation() {
-
 
 	frames = NULL;
 	animationName = NULL;
@@ -49,8 +48,7 @@ Animation::Animation() {
 	strcpy(animationName, newInput); 
 	//This removes whatever was inside the dynamic variable (we do this since we relocated the user input to animationName)
 	delete[] newInput; 
-	//Since we removed what was inside the dynamic variable, we need to make it null.
-	newInput = NULL; 
+
 }
 
 
@@ -59,8 +57,6 @@ void Animation::ReportAnimation() {
 	Frame* instanceFrame = frames;
 	// This will report the name of the animation.
 	cout << "Animation name is: " << animationName << endl; 
-	
-	
 	//if frame exists:
 	while (instanceFrame) {
 		//Display the image, count number of files and display the file name.
@@ -79,7 +75,6 @@ void Animation::DeleteFrame() {
 	if (instanceFrame == NULL) {
 		cout << "There are no frames to delete." << endl;
 	}
-
 		else {
 			//Loop to second last frame
 			while (instanceFrame->GetpNext()->GetpNext() != NULL) {
@@ -90,7 +85,6 @@ void Animation::DeleteFrame() {
 			delete(instanceFrame->GetpNext());
 			//Since we deleted the pointer, it must be set to null.
 			instanceFrame->GetpNext() = NULL;
-
 		}
 	}
 
@@ -114,13 +108,7 @@ void Animation::EditFrame() {
 	cout << "There are " << interval << " frame(s) in the list. Please specify the index (<=" << interval-1 << ") to edit at: ";
 	//User will input which index they want to edit.
 	cin >> userInput; 
-	//While user input is less than 0 or greater than the number of frames, display an error.
-	while (userInput < 0 || userInput > interval - 1) {
-		//This is the error message.
-		cout << "Invalid input. Please enter a valid input"; 
-		//User will be able to retype a valid input.
-		cin >> userInput; 
-	}
+	
 	//While user input is not 0
 	while (userInput != 0) { 
 		//go through all frames until the user input matches with the frame
@@ -144,8 +132,6 @@ void Animation::EditFrame() {
 	strcpy(thisFrame->GetFrameName(), newInput);
 	//This will delete the temporary value
 	delete[] newInput;
-	//Setting the temporary value as null.
-	newInput = NULL; 
 
 }
 
